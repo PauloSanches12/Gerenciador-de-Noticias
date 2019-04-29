@@ -3,7 +3,7 @@
   <nav>
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <button class="nav-item nav-link"  (click)="tela='inicial'" aria-selected="true">Tela Inical</button>
+        <button class="nav-item nav-link"  (click)="tela='inicial'" aria-selected="true">Tela Inicial</button>
       </li>
       
       <li class="nav-item">
@@ -27,7 +27,7 @@
   <div *ngIf="tela == 'inicial'">
     <form #forminical="ngForm">
       <div class="form-group">
-        <label for="nome">Noticias Publicadas</label>
+        <label for="nome"><h4>Notícias Publicadas</h4></label>
       </div>
       <div *ngFor="let z of service.listaSalva()">
         <ul>
@@ -52,13 +52,13 @@
   <div *ngIf="tela == 'cadastro'">
     <form #formcadastro="ngForm">
       <div class="form-group">
-        <label for="nome">Autor</label>
+        <label for="nome"><b>Autor</b></label>
         <select class="form-control" name="autor" id="autor" [(ngModel)]="autor" required>
           <option *ngFor="let autor of service.listaAutores()">{{autor}}</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="notticia">Notícia</label>
+        <label for="notticia"><b>Notícia</b></label>
         <textarea id="conteudo" name="conteudo" cols="80" rows="5" class="form-control" [(ngModel)]="noticia"
           required></textarea>
       </div>
@@ -72,7 +72,7 @@
   <div *ngIf="tela == 'publicar'">
     <form #formpublicar="ngForm">
       <div class="form-group">
-        <label for="publicar">Publicar Notícias</label>
+        <label for="publicar"><h4>Publicar Notícias</h4></label>
       </div>
       <div *ngFor="let n of service.listaSalva()"> 
         <div *ngIf="n.publicado == false">
@@ -97,10 +97,10 @@
 
   <div *ngIf="tela == 'estatisticas'">
     <h2>Estatísticas</h2>
-    <table class="table table-bordered table-sm">
+    <table style="text-align:center" class="table table-bordered table-sm">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Autor:</th>
+          <th scope="col">Autor</th>
           <th scope="col">Quantidade de Notícias Publicadas</th>
         </tr>
       </thead>
@@ -112,7 +112,7 @@
       </tbody>
     </table>
 
-    <table class="table table-bordered table-sm">
+    <table style="text-align:center" class="table table-bordered table-sm">
       <thead class="table-dark">
         <tr>
           <th scope="col">Autor que mais Publicou</th>
@@ -123,7 +123,7 @@
       </tbody>
     </table>
 
-    <table class="table table-bordered table-sm">
+    <table style="text-align:center" class="table table-bordered table-sm">
       <thead class="table-dark">
         <tr>
           <th scope="col">Views</th>
