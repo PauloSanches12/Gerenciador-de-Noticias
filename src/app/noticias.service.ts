@@ -23,7 +23,6 @@ export class NoticiasService {
       'views': 0
     }
     this.salvo.push(a);
-    console.log(this.salvo)
   }
 
   listaSalva(){
@@ -49,7 +48,6 @@ export class NoticiasService {
       }
     }
   }
-
 
   noticasPorAutor(){
     let estatisticas = [];

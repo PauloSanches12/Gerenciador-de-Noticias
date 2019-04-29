@@ -31,12 +31,11 @@
       </div>
       <div *ngFor="let z of service.listaSalva()">
         <ul>
-          <li *ngIf="z.publicado"> <!--Resolver Aqui, só ta publicando uma noticia-->
+          <li *ngIf="z.publicado"> 
             {{z.noticia}}<br>
             <button class="btn btn-primary" (click)="verNoticiaPublicada(z)">Ver</button>
           </li>
         </ul>
-
       </div>
 
       <div>
@@ -80,7 +79,7 @@
           <li >
             {{n.autor}}<br>
             {{n.noticia}}<br>
-            <button class="btn btn-primary"  (click)="service.publicarNoticia(n)" >Publicar</button> <!--Consertar Essa Parte-->
+            <button class="btn btn-primary"  (click)="service.publicarNoticia(n)" >Publicar</button>
           </li>
         </div>
       </div>
@@ -146,5 +145,4 @@
       {{service.visualizar.noticia}}
     </div>
   </div>
-
 </div>

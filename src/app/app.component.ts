@@ -11,7 +11,6 @@ export class AppComponent {
   autor = null;
   noticia = null;
 
-
   avancarPublicacao(){
     this.tela = "publicar";
   }
@@ -30,7 +29,6 @@ export class AppComponent {
     this.tela = "publicar";
     this.service.salvar(this.autor, this.noticia);
   }
-
 
   verNoticiaPublicada(valor){
     this.service.verNoticiaPublicada(valor)
