@@ -1,0 +1,150 @@
+<br>
+<div class="container">
+  <nav>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <button class="nav-item nav-link"  (click)="tela='inicial'" aria-selected="true">Tela Inical</button>
+      </li>
+      
+      <li class="nav-item">
+        <button class="nav-item nav-link" (click)="avancarCadastro()" aria-controls="cadastrar"
+          aria-selected="false">Cadastrar</button>
+      </li>
+      
+      <li class="nav-item">
+        <button class="nav-item nav-link " (click)="avancarPublicacao()" aria-controls="publicar"
+          aria-selected="false">Publicar</button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-item nav-link " (click)="tela = 'estatisticas'" aria-controls="estatisticas"
+          aria-selected="false">Estatísticas</button>
+      </li>
+    </ul>
+  </nav>
+  <br>
+
+  <div *ngIf="tela == 'inicial'">
+    <form #forminical="ngForm">
+      <div class="form-group">
+        <label for="nome">Noticias Publicadas</label>
+      </div>
+      <div *ngFor="let z of service.listaSalva()">
+        <ul>
+          <li *ngIf="z.publicado"> <!--Resolver Aqui, só ta publicando uma noticia-->
+            {{z.noticia}}<br>
+            <button class="btn btn-primary" (click)="verNoticiaPublicada(z)">Ver</button>
+          </li>
+        </ul>
+
+      </div>
+
+      <div>
+        <button class="btn btn-primary" (click)="avancarPublicacao()">Publicar</button>&nbsp;
+        <button class="btn btn-primary" (click)="avancarCadastro()">Cadastrar</button>
+      </div>
+      <br>
+      <div>
+        <button class="btn btn-primary" (click)="avancarEstatisticas()">Estatísticas</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="tela == 'cadastro'">
+    <form #formcadastro="ngForm">
+      <div class="form-group">
+        <label for="nome">Autor</label>
+        <select class="form-control" name="autor" id="autor" [(ngModel)]="autor" required>
+          <option *ngFor="let autor of service.listaAutores()">{{autor}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="notticia">Notícia</label>
+        <textarea id="conteudo" name="conteudo" cols="80" rows="5" class="form-control" [(ngModel)]="noticia"
+          required></textarea>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="salvarNoticia()"
+          [disabled]="!formcadastro.form.valid"> Salvar</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="tela == 'publicar'">
+    <form #formpublicar="ngForm">
+      <div class="form-group">
+        <label for="publicar">Publicar Notícias</label>
+      </div>
+      <div *ngFor="let n of service.listaSalva()"> 
+        <div *ngIf="n.publicado == false">
+          <li >
+            {{n.autor}}<br>
+            {{n.noticia}}<br>
+            <button class="btn btn-primary"  (click)="service.publicarNoticia(n)" >Publicar</button> <!--Consertar Essa Parte-->
+          </li>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="tela == 'noticia'">
+    <form #formnoticia="ngForm">
+      <div class="form-group">
+        <label for="notica">Noticia</label><br>
+        <label for="autor">Autor</label>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="tela == 'estatisticas'">
+    <h2>Estatísticas</h2>
+    <table class="table table-bordered table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Autor:</th>
+          <th scope="col">Quantidade de Notícias Publicadas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let estatisticas of service.noticasPorAutor()">
+          <td>{{estatisticas.autor}}</td>
+          <td>{{estatisticas.valor}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered table-sm">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Autor que mais Publicou</th>
+        </tr>
+      </thead>
+      <tbody>
+        <td>{{service.AutorMaisPublicou()}}</td>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered table-sm">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Views</th>
+          <th scope="col">Notícias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let noticia of service.quantidadeDeViws()">
+          <td *ngIf="noticia.publicado == true">{{noticia.views}}</td>
+          <td *ngIf="noticia.publicado == true">{{noticia.noticia}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="tela == 'visualizar'">
+    <div>
+      {{service.visualizar.autor}}<br>
+      {{service.visualizar.noticia}}
+    </div>
+  </div>
+
+</div>
